@@ -37,20 +37,21 @@ This project implements a Space Invaders clone in C++ using Raylib and trains an
 ## Project Structure
 Space-Invaders/
 ├── src/
+│   ├── genome/
+│   ├── neat/
+│   ├── alien.cpp
 │   ├── main.cpp       # Entry point
-│   ├── player.cpp     # Spaceship logic
-│   ├── player.hpp     # Spaceship (player)
-│   ├── laser.hpp      # laser beam
+│   ├── spaceship.cpp   
+│   ├── spaceship.hpp     
+│   ├── laser.hpp      
 │   ├── laser.cpp
 │   ├── game.hpp       # main game logic
 │   ├── game.cpp
-│   ├── neat.cpp       # NEAT implementation
-│   ├── neat.hpp
 │   
 ├── include/
 │   ├── ...            # Header files
 ├── lib/               
-├── assets/            # Game assets (images)
+├── assets/            # Game assets (images, fonts, sounds)
 ├── main.code-workspace     
 ├── Makefile           # Makefile (if using Make)
 └── README.md          # This file

@@ -11,6 +11,8 @@ class Spaceship {
         void moveLeft();
         void moveRight();
         void fireLaser();
+        Rectangle getRect();
+        void reset();
         std::vector<Laser> lasers;
         float laserSpeed = 6.0f;
 
@@ -19,4 +21,5 @@ class Spaceship {
         Vector2 position;
         const float velocity = 7.0f;
         double delayLaser;
+        Sound laserSound;
 };

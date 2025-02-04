@@ -1,4 +1,4 @@
-#include "barrier.hpp"
+#include "headers/barrier.hpp"
 
 std::vector<std::vector<int>> Barrier::grid = {
     {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
