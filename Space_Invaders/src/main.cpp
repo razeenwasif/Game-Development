@@ -1,7 +1,6 @@
 #include <raylib.h>
 #include <string>
 #include "headers/game.hpp"
-#include "neat/neat.hpp"
 
 // F5 to run program
 
