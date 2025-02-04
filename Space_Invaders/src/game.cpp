@@ -120,11 +120,11 @@ void Game::moveAliens()
     for (auto& alien : aliens) {
         if (alien.position.x + alien.alienImages[alien.type - 1].width > GetScreenWidth() - OFFSET) {
             aliensDirection = -1;
-            moveAliensDown(4);
+            moveAliensDown(2); // Reduced from 4 to 2
         } 
         if (alien.position.x < OFFSET) {
             aliensDirection = 1;
-            moveAliensDown(4);
+            moveAliensDown(2); // Reduced from 4 to 2
         }
         alien.update(aliensDirection);
     }
