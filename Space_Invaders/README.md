@@ -30,9 +30,12 @@ This project implements a Space Invaders clone in C++ using Raylib and trains an
 3. Run the project using F5
 
 ## Game Controls
+Player controls:
 - left arrow key / A: move spaceship left
 - right arrow key / D: move spaceship right
 - spacebar: shoot laser
+AI:
+- press the i key to switch to AI mode and watch the AI play
 
 ## Project Structure
 Space-Invaders/

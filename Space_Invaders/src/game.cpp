@@ -8,6 +8,7 @@ Game::Game() {
     music = LoadMusicStream("assets/music.ogg");
     explosionSound = LoadSound("assets/explosion.ogg");
     PlayMusicStream(music);
+    currentMode = PLAYER_MODE; // Initialize to player mode
     initGame();
 }
 
@@ -19,33 +20,56 @@ Game::~Game() {
 
 void Game::update() {
     if (run) {
+        if (currentMode == PLAYER_MODE) {
+            double currentTime = GetTime();
+            if (currentTime - timeLastSpawn > mysteryshipSpawnInterval) {
+                mysteryship.spawn();
+                timeLastSpawn = GetTime();
+                mysteryshipSpawnInterval = GetRandomValue(10, 20);
+            }
 
-        double currentTime = GetTime();
-        if (currentTime - timeLastSpawn > mysteryshipSpawnInterval) {
-            mysteryship.spawn();
-            timeLastSpawn = GetTime();
-            mysteryshipSpawnInterval = GetRandomValue(10, 20);
+            for (auto& laser : spaceship.lasers) laser.update();
+
+            moveAliens();
+
+            alienShootLaser();
+
+            for (auto& laser : alienLasers) { laser.update(); }
+
+            deleteInactiveLasers();
+
+            mysteryship.update();
+
+            checkForCollisions();
+        } else if (currentMode == AI_MODE) {
+            updateAI();
         }
-
-        for (auto& laser : spaceship.lasers) laser.update();
-
-        moveAliens();
-
-        alienShootLaser();
-
-        for (auto& laser : alienLasers) { laser.update(); }
-
-        deleteInactiveLasers();
-
-        mysteryship.update();
-
-        checkForCollisions();
-
     } else {
         if (IsKeyDown(KEY_ENTER)) {
             reset();
             initGame();
         }
+    }
+}
+
+void Game::updateAI() {
+    if (run) {
+        // Implement AI logic here
+        // Example: Move spaceship randomly and fire lasers
+        if (GetRandomValue(0, 100) < 10) spaceship.moveLeft();
+        if (GetRandomValue(0, 100) < 10) spaceship.moveRight();
+        if (GetRandomValue(0, 100) < 10) spaceship.fireLaser();
+
+        // Update game elements
+        for (auto& laser : spaceship.lasers) laser.update();
+        moveAliens();
+        alienShootLaser();
+        for (auto& laser : alienLasers) laser.update();
+        deleteInactiveLasers();
+        mysteryship.update();
+        checkForCollisions();
+
+        if (aliens.empty()) { gameOver(); }
     }
 }
 
@@ -64,7 +88,12 @@ void Game::draw() {
 }
 
 void Game::handleInput() {
-    if (run) {
+    if (IsKeyPressed(KEY_I)) {
+        currentMode = (currentMode == PLAYER_MODE) ? AI_MODE : PLAYER_MODE;
+        reset();
+        initGame();
+    }
+    if (run && currentMode == PLAYER_MODE) {
         if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { spaceship.moveLeft(); } 
         else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { spaceship.moveRight(); } 
         else if (IsKeyDown(KEY_SPACE)) { spaceship.fireLaser(); }
