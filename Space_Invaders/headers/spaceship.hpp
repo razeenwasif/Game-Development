@@ -15,10 +15,10 @@ class Spaceship {
         void reset();
         std::vector<Laser> lasers;
         float laserSpeed = 6.0f;
+        Vector2 position;
 
     private:
         Texture2D image;
-        Vector2 position;
         const float velocity = 7.0f;
         double delayLaser;
         Sound laserSound;

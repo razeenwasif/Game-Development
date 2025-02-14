@@ -3,8 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
+                "${workspaceFolder}/**",
                 "C:/raylib/raylib/src/**",
-                "${workspaceFolder}/**"
+                "C:/Python313/Include"
+
             ],
             "defines": [
                 "_DEBUG",
@@ -16,7 +18,7 @@
             "compilerPath": "C:/raylib/w64devkit/bin/gcc.exe",
             "cStandard": "c99",
             "cppStandard": "c++14",
-            "intelliSenseMode": "gcc-x64",
+            "intelliSenseMode": "windows-gcc-x64",
             "configurationProvider": "ms-vscode.makefile-tools"
         },
         {

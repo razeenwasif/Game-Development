@@ -10,9 +10,9 @@ class MysteryShip {
         void spawn();
         Rectangle getRect();
         bool alive;
+        Vector2 position;
 
     private:
-        Vector2 position;
         Texture2D image;
         int speed;
 };

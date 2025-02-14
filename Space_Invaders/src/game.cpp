@@ -1,6 +1,8 @@
 #include "headers/game.hpp"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <sstream>
 
 // increase laserspeed as game progresses
 
@@ -19,7 +21,9 @@ Game::~Game() {
 }
 
 void Game::update() {
+
     if (run) {
+
         if (currentMode == PLAYER_MODE) {
             double currentTime = GetTime();
             if (currentTime - timeLastSpawn > mysteryshipSpawnInterval) {
@@ -41,10 +45,9 @@ void Game::update() {
             mysteryship.update();
 
             checkForCollisions();
-        } else if (currentMode == AI_MODE) {
-            updateAI();
-        }
-    } else {
+        } 
+    } 
+    else {
         if (IsKeyDown(KEY_ENTER)) {
             reset();
             initGame();
@@ -52,24 +55,12 @@ void Game::update() {
     }
 }
 
-void Game::updateAI() {
-    if (run) {
-        // Implement AI logic here
-        // Example: Move spaceship randomly and fire lasers
-        if (GetRandomValue(0, 100) < 10) spaceship.moveLeft();
-        if (GetRandomValue(0, 100) < 10) spaceship.moveRight();
-        if (GetRandomValue(0, 100) < 10) spaceship.fireLaser();
+void Game::handleInput() {
 
-        // Update game elements
-        for (auto& laser : spaceship.lasers) laser.update();
-        moveAliens();
-        alienShootLaser();
-        for (auto& laser : alienLasers) laser.update();
-        deleteInactiveLasers();
-        mysteryship.update();
-        checkForCollisions();
-
-        if (aliens.empty()) { gameOver(); }
+    if (run && currentMode == PLAYER_MODE) {
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { spaceship.moveLeft(); } 
+        else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { spaceship.moveRight(); } 
+        else if (IsKeyDown(KEY_SPACE)) { spaceship.fireLaser(); }
     }
 }
 
@@ -85,19 +76,6 @@ void Game::draw() {
     for (auto& laser : alienLasers) { laser.draw(); }
 
     mysteryship.draw();
-}
-
-void Game::handleInput() {
-    if (IsKeyPressed(KEY_I)) {
-        currentMode = (currentMode == PLAYER_MODE) ? AI_MODE : PLAYER_MODE;
-        reset();
-        initGame();
-    }
-    if (run && currentMode == PLAYER_MODE) {
-        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { spaceship.moveLeft(); } 
-        else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { spaceship.moveRight(); } 
-        else if (IsKeyDown(KEY_SPACE)) { spaceship.fireLaser(); }
-    }
 }
 
 void Game::deleteInactiveLasers() {

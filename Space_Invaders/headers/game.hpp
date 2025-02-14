@@ -10,8 +10,9 @@ class Game {
         ~Game();
         void draw();
         void update();
-        void updateAI();
         void handleInput();
+        void reset();
+        void initGame();
         int currentMode;
         int lives;
         bool run;
@@ -44,8 +45,6 @@ class Game {
         void alienShootLaser();
         void checkForCollisions();
         void gameOver();
-        void reset();
-        void initGame();
         void checkForHighScore();
         void saveHighScore(int highscore);
         int loadHighScore();

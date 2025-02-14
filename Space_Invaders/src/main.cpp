@@ -2,7 +2,7 @@
 #include <string>
 #include "headers/game.hpp"
 
-// F5 to run program
+// F5 to run program or ./game.exe
 
 std::string formatWithLeadingZeros(int number, int width) {
     std::string numberText = std::to_string(number);
@@ -37,6 +37,12 @@ int main() {
 
         // handle game logic
         game.update();
+
+        if (IsKeyPressed(KEY_I)) {
+            game.currentMode = (game.currentMode == Game::PLAYER_MODE) ? Game::AI_MODE : Game::PLAYER_MODE;
+            game.reset();
+            game.initGame();
+        }
 
         // draw game
         BeginDrawing();
