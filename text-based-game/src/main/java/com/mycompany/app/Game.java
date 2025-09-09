@@ -12,11 +12,12 @@ import javax.swing.JPanel;
 public class Game {
     
     JFrame window;
-    JPanel titleNamePanel, startButtonPanel;
-    JLabel titleNameLabel;
+    JPanel titleNamePanel, startButtonPanel, narrativeTextPanel;
+  JLabel titleNameLabel;
     JButton startButton;
     Container container;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 58);
+    Font font = new Font("Times New Roman", Font.PLAIN, 30);
     
     public Game() {
       // create a game window; 
@@ -32,24 +33,42 @@ public class Game {
       titleNameLabel.setForeground(Color.white); 
       titleNameLabel.setFont(titleFont);
       
-      // title pane 
+      // title panel 
       titleNamePanel = new JPanel();
       titleNamePanel.setBounds(100, 100, 600, 150);
-      titleNamePanel.setBackground(Color.blue);
+      titleNamePanel.setBackground(Color.black);
       titleNamePanel.add(titleNameLabel);
 
       // start button 
       startButton = new JButton("START");
-      startButton.setForeground(Color.black);
+      startButton.setForeground(Color.white);
+      startButton.setBackground(Color.black);
+      startButton.setOpaque(true);
+      startButton.setBorderPainted(false);
+      startButton.setFont(font);
+      startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+          public void mouseEntered(java.awt.event.MouseEvent evt) {
+              startButton.setBackground(Color.gray);
+          }
 
+          public void mouseExited(java.awt.event.MouseEvent evt) {
+              startButton.setBackground(Color.black);
+          }
+      });
+
+      // start button panel
       startButtonPanel = new JPanel();
       startButtonPanel.setBounds(300, 400, 200, 100);
-      startButtonPanel.setBackground(Color.blue);
+      startButtonPanel.setBackground(Color.black);
       startButtonPanel.add(startButton);
 
       container.add(titleNamePanel);
       container.add(startButtonPanel);
       window.setVisible(true);
+    }
+
+    public void createGameScreen() {
+
     }
 
     public static void main( String[] args ) {
