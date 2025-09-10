@@ -1,5 +1,9 @@
-package com.mycompany.app; 
+package com.mycompany.app;
 
+/** Represents the four cardinal directions. */
 public enum Direction {
-  NORTH, EAST, SOUTH, WEST
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST
 }
